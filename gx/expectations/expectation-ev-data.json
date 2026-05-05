@@ -1,0 +1,76 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "expectation-ev-data",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "dol_vehicle_id"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "electric_range",
+        "max_value": 337,
+        "min_value": 0
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "electric_vehicle_type",
+        "value_set": [
+          "Battery Electric Vehicle (BEV)",
+          "Plug-in Hybrid Electric Vehicle (PHEV)"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "kwargs": {
+        "column": "electric_range",
+        "type_list": [
+          "int64",
+          "float64",
+          "int",
+          "float"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_value_lengths_to_be_between",
+      "kwargs": {
+        "column": "vin",
+        "max_value": 10,
+        "min_value": 5
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "state",
+        "regex": "^[A-Z]{2}$"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": {
+        "column": "make",
+        "max_value": 0.01,
+        "min_value": 0.0001
+      },
+      "meta": {}
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "great_expectations_version": "0.18.22"
+  }
+}

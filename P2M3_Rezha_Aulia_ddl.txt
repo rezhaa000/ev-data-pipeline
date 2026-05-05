@@ -1,0 +1,78 @@
+URL Dataset : https://www.kaggle.com/datasets/gunapro/electric-vehicle-population-data
+
+== DDL ==
+
+CREATE TABLE table_m3 (
+    "VIN (1-10)"                                                      VARCHAR(20),
+    "County"                                                          VARCHAR(100),
+    "City"                                                            VARCHAR(100),
+    "State"                                                           VARCHAR(10),
+    "Postal Code"                                                     VARCHAR(10),
+    "Model Year"                                                      FLOAT,
+    "Make"                                                            VARCHAR(100),
+    "Model"                                                           VARCHAR(100),
+    "Electric Vehicle Type"                                           VARCHAR(100),
+    "Clean Alternative Fuel Vehicle (CAFV) Eligibility"               VARCHAR(200),
+    "Electric Range"                                                  FLOAT,
+    "Base MSRP"                                                       FLOAT,
+    "Legislative District"                                            FLOAT,
+    "DOL Vehicle ID"                                                  FLOAT,
+    "Vehicle Location"                                                VARCHAR(100),
+    "Electric Utility"                                                VARCHAR(200),
+    "2020 Census Tract"                                               FLOAT
+);
+
+== DML ==
+
+import pandas as pd
+import psycopg2
+from io import StringIO
+
+# Baca CSV
+df = pd.read_csv('P2M3_Rezha_Aulia_data_raw.csv')
+
+# Koneksi
+conn = psycopg2.connect(
+    dbname='airflow',
+    user='airflow',
+    password='airflow',
+    host='localhost',
+    port='5434'
+)
+cur = conn.cursor()
+
+# Table
+cur.execute("""
+    DROP TABLE IF EXISTS table_m3;
+    CREATE TABLE table_m3 (
+        "VIN (1-10)" VARCHAR(20),
+        "County" VARCHAR(100),
+        "City" VARCHAR(100),
+        "State" VARCHAR(10),    
+        "Postal Code" VARCHAR(20),    
+        "Model Year" FLOAT,    
+        "Make" VARCHAR(100),    
+        "Model" VARCHAR(100),
+        "Electric Vehicle Type" VARCHAR(100),    
+        "Clean Alternative Fuel Vehicle (CAFV) Eligibility" VARCHAR(200),    
+        "Electric Range" FLOAT,    
+        "Base MSRP" FLOAT,    
+        "Legislative District" FLOAT,    
+        "DOL Vehicle ID" FLOAT,
+        "Vehicle Location" VARCHAR(100),
+        "Electric Utility" VARCHAR(200),
+        "2020 Census Tract" FLOAT 
+    )
+""")
+conn.commit()
+
+# Insert menggunakan copy_from
+buffer = StringIO()
+df.to_csv(buffer, index=False, header=False, sep='\t')
+buffer.seek(0)
+
+cur.copy_from(buffer, 'table_m3', sep='\t', null='')
+
+conn.commit()
+cur.close()
+conn.close()

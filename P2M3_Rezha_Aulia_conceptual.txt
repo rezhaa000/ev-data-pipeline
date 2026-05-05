@@ -1,0 +1,87 @@
+======================================
+Milestone 3 - Conceptual Problems
+Name : Rezha Aulia
+Batch : FTDS-037-HCK
+======================================
+
+1. Jelaskan apa yang dimaksud dengan NoSQL!
+
+NoSQL adalah jenis database yang tidak menggunakan struktur tabel seperti database relational pada umumnya. NoSQL dirancang untuk menangani data yang tidak
+terstruktur atau semi-terstruktur dalam jumlah besar dengan performa tinggi. NoSQL menyimpan data dalam berbagai format seperti dokumen (JSON), key-value,
+graph, atau wide-column. Berbeda dengan SQL yang memiliki schema kaku, NoSQL bersifat schema-less sehingga lebih fleksibel dalam penyimpanan data yang berubah-ubah strukturnya.
+
+2. Jelaskan kapan harus menggunakan NoSQL dan RDBMS!
+
+RDBMS (PostgreSQL dan MySQL) digunakan ketika:
+- Data terstruktur dengan schema tetap dan jelas
+- Membutuhkan transaksi ACID (Atomicity, Consistency, Isolation, dan Durability) yang ketat
+- Data memiliki relasi antar tabel yang kompleks
+- ex : Sistem perbankan, data keuangan, dan inventori produk
+
+NoSQL (Elasticsearch dan MongoDB) digunakan ketika:
+- Data tidak terstruktur atau semi-terstruktur
+- Membutuhkan skalabilitas horizontal yang tinggi
+- Volume data sangat besar dan terus bertambah (Big Data)
+- Membutuhkan read/write yang sangat cepat
+- ex : Log aplikasi, data real-time, pencarian teks, rekomendasi produk
+
+3. Sebutkan 2 tools/platform NoSQL selain Elasticsearch beserta keunggulannya!
+
+    1. MongoDB
+    - Database berbasis dokumen yang menyimpan data dalam format BSON (Binary JSON)
+    - Keunggulan : Schema yang sangat fleksibel, mudah di scale secara horizontal,
+    mendukung query yang kompleks seperti SQL, populer untuk aplikasi web modern, dan komunitas yang besar
+
+    2. Apache Cassandra
+    - Database wide-column yang dirancang menangani data dalam skala sangat besar
+    - Keunggulan : Sangat baik untuk write-heavy workload, highly available, mampu menangani jutaan transaksi perdetik,
+     dan digunakan perusahaan besar seperti Netflix dan Facebook untuk menyimpan data dalam skala petabyte
+
+
+
+4. Jelaskan apa yang kamu ketahui dari airflow!
+
+Apache Airflow adalah platform open-source untuk membuat, menjadwalkan, dan memonitor workflow atau pipeline secara 
+otomatis. Di Airflow, setiap workflow direpresentasikan sebagai DAG (Directed Acyclic Graph) yang terdiri
+dari beberapa task yang saling berhubung. Setiap task merepresentasikan satu pekerjaan tertentu
+
+Airflow berguna dalam Data Engineering karena memungkinkan Engineer untuk mengotomasi proses ETL (Extract, Transform, dan Load)
+yang berjalan secara terjadwal tanpa perlu dijalankan manual. Airflow juga menyediakan UI berbasis web yang memudahkan
+monitoring status setiap task 
+
+
+5. Jelaskan apa yang kamu ketahui dari Great Expectations!
+
+Great Expectations adlaah library Python open-souce yang digunakan untuk melakukan validasi kualitas data secara otomatis.
+Dengan Great Expectations, pengguna bisa mendefinisikan "expectation" atau ekspektasi tentang bagaimana data seharusnya terlihat,
+contohnya kolom tertentu harus unik, nilai harus berada dalam rentang tertentu atau tipe data harus sesuai.
+
+Great Expectations sangat berguna dalam pipeline data untuk memastikan bahwa data yang masuk ke sistem sudah bersih dan sesuai dengan
+standar kualitas yang diharapkan sebelum diproses lebih lanjut. Jika ada data yang tidak sesuai ekspektasi, GX akan memberikan laporan detail
+tentang data mana yang bermasalah.
+
+
+6. Jelaskan apa yang kamu ketahui dari Batch Processing!
+
+Batch Processing adalah metode pemrosesan data yang mana data dikumpulkan terlebih dahulu dalam jumlah besar kemudian
+diproses sekaligus pada waktu tertentu, bukan secara real-time satu per satu/
+
+ex:
+- Pemrosesan laporan keuangan bulanan di perusahaan
+- Pengiriman email marketing ke jutaan pelanggan sekaligus
+- Pemrosesan data transaksi di akhir hari
+
+Tools yang membantu:
+- Apache Airlfow : scheduling dan orchestration
+- Apache Spark : pemrosesan data besar secara paralel
+- Apache Hadoop : ditributed processing
+- Python scripts : batch processing sederhana
+
+Kelebihan Batch Processing:
+- Efisien untuk memproses data dalam jumlah besar
+- Tidak membutuhkan resource komputasi yang tinggi secara terus-menerus
+- Lebih mudah untuk di debug dan dimonitor
+
+Kekurangan:
+- Tidak cocok untuk kebutuhan real-time
+- Ada delay antara data masuk dan data diproses
